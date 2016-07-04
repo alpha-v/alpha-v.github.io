@@ -321,14 +321,14 @@
 <h4 id="格式化TF卡和U盘"><a href="#格式化TF卡和U盘" class="headerlink" title="格式化TF卡和U盘"></a>格式化TF卡和U盘</h4><p>打开Disk Utility进行格式化如图1、2</p>
 <img src="/2016/07/04/树莓派USB启动/1.png" alt="图1" title="图1">
 <img src="/2016/07/04/树莓派USB启动/2.png" alt="图2" title="图2">
-<h4 id="0x02-查看设备描述"><a href="#0x02-查看设备描述" class="headerlink" title="0x02 查看设备描述"></a>0x02 查看设备描述</h4><p>打开终端 diskutil list查看设备描述如图2这里我的TF卡是/dev/disk3 u盘是/dev/disk4 如图3</p>
+<h4 id="查看设备描述"><a href="#查看设备描述" class="headerlink" title="查看设备描述"></a>查看设备描述</h4><p>打开终端 diskutil list查看设备描述如图2这里我的TF卡是/dev/disk3 u盘是/dev/disk4 如图3</p>
 <img src="/2016/07/04/树莓派USB启动/3.png" alt="图3" title="图3">
-<h4 id="0x03-unmout-u盘设备"><a href="#0x03-unmout-u盘设备" class="headerlink" title="0x03 unmout u盘设备"></a>0x03 unmout u盘设备</h4><p>diskutil unmountdisk /dev/disk4 如图4</p>
+<h4 id="unmout-u盘设备"><a href="#unmout-u盘设备" class="headerlink" title="unmout u盘设备"></a>unmout u盘设备</h4><p>diskutil unmountdisk /dev/disk4 如图4</p>
 <img src="/2016/07/04/树莓派USB启动/4.png" alt="图4" title="图4">
-<h4 id="0x04-烧写镜像"><a href="#0x04-烧写镜像" class="headerlink" title="0x04 烧写镜像"></a>0x04 烧写镜像</h4><p>sudo dd if=/pathtoyour/kali-2.1.2-rpi2.img of=/dev/disk4 bs=1m 如图5</p>
+<h4 id="烧写镜像"><a href="#烧写镜像" class="headerlink" title="烧写镜像"></a>烧写镜像</h4><p>sudo dd if=/pathtoyour/kali-2.1.2-rpi2.img of=/dev/disk4 bs=1m 如图5</p>
 <img src="/2016/07/04/树莓派USB启动/5.png" alt="图5" title="图5">
-<h4 id="0x05-修改启动配置文件"><a href="#0x05-修改启动配置文件" class="headerlink" title="0x05 修改启动配置文件"></a>0x05 修改启动配置文件</h4><p>将烧写好的的U盘打开并将所见所有文件复制到tf卡中，并修改tf卡中的cmdline.txt文件将root=/dev/mmcblk0p2 修改为/dev/sda2 保存如图6、7<br><img src="/2016/07/04/树莓派USB启动/6.png" alt="图6" title="图6"><br><img src="/2016/07/04/树莓派USB启动/7.png" alt="图7" title="图7"></p>
-<h4 id="0x06-重分配空间"><a href="#0x06-重分配空间" class="headerlink" title="0x06 重分配空间"></a>0x06 重分配空间</h4><p>把U盘和TF卡从电脑上拔出插入树莓派并启动，df -h 发现我们的U盘并没达到64G，而只有可怜的6.7G，重新分配空间，如图8，9，10</p>
+<h4 id="修改启动配置文件"><a href="#修改启动配置文件" class="headerlink" title="修改启动配置文件"></a>修改启动配置文件</h4><p>将烧写好的的U盘打开并将所见所有文件复制到tf卡中，并修改tf卡中的cmdline.txt文件将root=/dev/mmcblk0p2 修改为/dev/sda2 保存如图6、7<br><img src="/2016/07/04/树莓派USB启动/6.png" alt="图6" title="图6"><br><img src="/2016/07/04/树莓派USB启动/7.png" alt="图7" title="图7"></p>
+<h4 id="重分配空间"><a href="#重分配空间" class="headerlink" title="重分配空间"></a>重分配空间</h4><p>把U盘和TF卡从电脑上拔出插入树莓派并启动，df -h 发现我们的U盘并没达到64G，而只有可怜的6.7G，重新分配空间，如图8，9，10</p>
 <img src="/2016/07/04/树莓派USB启动/8.png" alt="图8" title="图8">
 <img src="/2016/07/04/树莓派USB启动/9.png" alt="图9" title="图9">
 <p>重新启动 reboot</p>
