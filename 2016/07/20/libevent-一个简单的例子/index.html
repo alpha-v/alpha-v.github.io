@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="libevent," />
 
 
 
@@ -84,12 +84,34 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Alpha-V's Blog">
-<meta property="og:url" content="https://alpha-v.link/index.html">
+<meta name="description" content="概述
+　　libevent是一个跨平台事件驱动的网络库，这里就不多说其优点了，官网讲的已经很详细了。这篇文章是主要介绍如何使用libevent的入门篇，一个简单例子（可以用telnet做客户端）。。。注释应该算是清楚了。
+　　官方文档
+　
+　
+一个简单的例子
+1234567891011121314151617181920212223242526272829303132333435363738394">
+<meta property="og:type" content="article">
+<meta property="og:title" content="libevent-一个简单的例子">
+<meta property="og:url" content="https://alpha-v.link/2016/07/20/libevent-一个简单的例子/index.html">
 <meta property="og:site_name" content="Alpha-V's Blog">
+<meta property="og:description" content="概述
+　　libevent是一个跨平台事件驱动的网络库，这里就不多说其优点了，官网讲的已经很详细了。这篇文章是主要介绍如何使用libevent的入门篇，一个简单例子（可以用telnet做客户端）。。。注释应该算是清楚了。
+　　官方文档
+　
+　
+一个简单的例子
+1234567891011121314151617181920212223242526272829303132333435363738394">
+<meta property="og:updated_time" content="2016-07-20T13:58:57.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Alpha-V's Blog">
+<meta name="twitter:title" content="libevent-一个简单的例子">
+<meta name="twitter:description" content="概述
+　　libevent是一个跨平台事件驱动的网络库，这里就不多说其优点了，官网讲的已经很详细了。这篇文章是主要介绍如何使用libevent的入门篇，一个简单例子（可以用telnet做客户端）。。。注释应该算是清楚了。
+　　官方文档
+　
+　
+一个简单的例子
+1234567891011121314151617181920212223242526272829303132333435363738394">
 
 
 
@@ -110,9 +132,9 @@
 
 
 
-  <link rel="canonical" href="https://alpha-v.link/"/>
+  <link rel="canonical" href="https://alpha-v.link/2016/07/20/libevent-一个简单的例子/"/>
 
-  <title> Alpha-V's Blog </title>
+  <title> libevent-一个简单的例子 | Alpha-V's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -133,9 +155,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -222,9 +242,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
   
@@ -244,10 +264,7 @@
             
             
               
-                
-                <a class="post-title-link" href="/2016/07/20/libevent-一个简单的例子/" itemprop="url">
-                  libevent-一个简单的例子
-                </a>
+                libevent-一个简单的例子
               
             
           </h1>
@@ -306,9 +323,7 @@
       
 
       
-        
-          
-            <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><hr>
+        <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><hr>
 <p>　　<a href="http://libevent.org/" target="_blank" rel="external">libevent</a>是一个跨平台事件驱动的网络库，这里就不多说其优点了，官网讲的已经很详细了。这篇文章是主要介绍如何使用libevent的入门篇，一个简单例子（可以用telnet做客户端）。。。注释应该算是清楚了。</p>
 <p>　　<a href="http://www.wangafu.net/~nickm/libevent-book/" target="_blank" rel="external">官方文档</a>
 　
@@ -316,174 +331,58 @@
 <h3 id="一个简单的例子"><a href="#一个简单的例子" class="headerlink" title="一个简单的例子"></a>一个简单的例子</h3><hr>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/socket.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;netinet/in.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;arpa/inet.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;event.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_LINE  1024</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">read_cb</span><span class="params">(<span class="keyword">struct</span> bufferevent *bev, <span class="keyword">void</span> *arg)</span> </span>&#123;</div><div class="line">    <span class="keyword">struct</span> evbuffer *buf = (<span class="keyword">struct</span> evbuffer *)arg;</div><div class="line">    <span class="keyword">char</span> line[MAX_LINE];</div><div class="line">    <span class="keyword">int</span> n;</div><div class="line">    <span class="keyword">evutil_socket_t</span> fd = bufferevent_getfd(bev);</div><div class="line">    <span class="keyword">while</span> (n = bufferevent_read(bev, line, MAX_LINE<span class="number">-1</span>), n &gt; <span class="number">0</span>) &#123;</div><div class="line">        line[n] = <span class="string">'\0'</span>;</div><div class="line">        <span class="comment">//将读取到的内容放进缓冲区</span></div><div class="line">        evbuffer_add(buf, line, n);</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"get buf %s\n"</span>,line);</div><div class="line"></div><div class="line">        <span class="comment">//如果缓冲区中有--则将buf中数据回写会客户端</span></div><div class="line">        <span class="keyword">const</span> <span class="keyword">char</span> *sp = <span class="string">"--"</span>;</div><div class="line">        <span class="keyword">struct</span> evbuffer_ptr ptr = evbuffer_search(buf, sp, <span class="built_in">strlen</span>(sp), <span class="number">0</span>);</div><div class="line">        <span class="keyword">if</span> (ptr.pos != <span class="number">-1</span>) &#123;</div><div class="line">            bufferevent_write_buffer(bev, buf); <span class="comment">//使用buffer的方式输出结果</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">write_cb</span><span class="params">(<span class="keyword">struct</span> bufferevent *bev, <span class="keyword">void</span> *arg)</span> </span>&#123;&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">error_cb</span><span class="params">(<span class="keyword">struct</span> bufferevent *bev, <span class="keyword">short</span> event, <span class="keyword">void</span> *arg)</span> </span>&#123;</div><div class="line">    <span class="keyword">evutil_socket_t</span> fd = bufferevent_getfd(bev);</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"fd = %u，"</span>, fd);</div><div class="line">    <span class="keyword">if</span> (event &amp; BEV_EVENT_TIMEOUT) &#123;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"BEV_EVENT_TIMEOUT\n"</span>);</div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (event &amp; BEV_EVENT_EOF) &#123;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"BEV_EVENT_EOF\n"</span>);</div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (event &amp; BEV_EVENT_ERROR) &#123;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"BEV_EVENT_ERROR\n"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">struct</span> evbuffer *buf = (<span class="keyword">struct</span> evbuffer *)arg;</div><div class="line">    evbuffer_free(buf);</div><div class="line">    bufferevent_free(bev);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//typedef void (*event_callback_fn)(evutil_socket_t, short, void *);</span></div><div class="line"><span class="comment">//回调函数，用于监听连接进来的客户端socket</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">do_accept</span><span class="params">(<span class="keyword">evutil_socket_t</span> fd, <span class="keyword">short</span> event, <span class="keyword">void</span> *arg)</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">int</span> client_socketfd;</div><div class="line">    <span class="keyword">struct</span> sockaddr_in client_addr;</div><div class="line">    <span class="keyword">socklen_t</span> len = <span class="keyword">sizeof</span>(<span class="keyword">struct</span> sockaddr_in);</div><div class="line"></div><div class="line">    client_socketfd = accept(fd, (<span class="keyword">struct</span> sockaddr *) &amp;client_addr, &amp;len);</div><div class="line">    <span class="keyword">if</span> (client_socketfd &lt; <span class="number">0</span>) &#123;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"accpet error"</span>);</div><div class="line">        <span class="built_in">exit</span>(<span class="number">-1</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">struct</span> event_base *base = (<span class="keyword">struct</span> event_base *) arg;</div><div class="line"></div><div class="line">    <span class="keyword">char</span> * msg = <span class="string">"libevent test"</span>;</div><div class="line">    send(client_socketfd, msg, <span class="built_in">strlen</span>(msg), <span class="number">0</span>);</div><div class="line"></div><div class="line">    <span class="comment">//创建一个bufferevent绑定在client_socketfd上，BEV_OPT_CLOSE_ON_FREE如果bufferevent释放那么client_socketfd也将关闭</span></div><div class="line">    <span class="keyword">struct</span> bufferevent *be = bufferevent_socket_new(base, client_socketfd, BEV_OPT_CLOSE_ON_FREE);</div><div class="line">    <span class="keyword">struct</span> evbuffer *buf = evbuffer_new();</div><div class="line">    <span class="comment">//设置读取和出错时的回调函数read_cb和error_cb，将buf缓冲区当参数传递，并将共用的buf传给回调函数</span></div><div class="line">    bufferevent_setcb(be, read_cb, <span class="literal">NULL</span>, error_cb, buf);</div><div class="line">    <span class="comment">//设置类型</span></div><div class="line">    bufferevent_enable(be, EV_READ|EV_WRITE|EV_PERSIST);</div><div class="line">    <span class="comment">//设置水位</span></div><div class="line">    bufferevent_setwatermark(be, EV_READ, <span class="number">0</span>, <span class="number">0</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> **argv)</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">int</span> server_socketfd;</div><div class="line">    <span class="keyword">struct</span> sockaddr_in server_addr;</div><div class="line">    <span class="built_in">memset</span>(&amp;server_addr,<span class="number">0</span>,<span class="keyword">sizeof</span>(server_addr));</div><div class="line">    server_addr.sin_family = AF_INET;</div><div class="line">    server_addr.sin_addr.s_addr = INADDR_ANY;</div><div class="line">    server_addr.sin_port = htons(<span class="number">7000</span>);</div><div class="line"></div><div class="line">    server_socketfd = socket(AF_INET,SOCK_STREAM,<span class="number">0</span>);</div><div class="line">    <span class="keyword">if</span> (server_socketfd &lt; <span class="number">0</span>) &#123;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"create socket error"</span>);</div><div class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//设置端口重用</span></div><div class="line">    evutil_make_listen_socket_reuseable(server_socketfd);</div><div class="line">    <span class="comment">//设置无阻塞</span></div><div class="line">    evutil_make_socket_nonblocking(server_socketfd);</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (bind(server_socketfd, (<span class="keyword">struct</span> sockaddr *)&amp;server_addr, <span class="keyword">sizeof</span>(<span class="keyword">struct</span> sockaddr))&lt;<span class="number">0</span>) &#123;</div><div class="line">    	<span class="built_in">printf</span>(<span class="string">"socket bind error"</span>);</div><div class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (listen(server_socketfd, <span class="number">5</span>) &lt; <span class="number">0</span>)&#123;</div><div class="line">    	<span class="built_in">printf</span>(<span class="string">"socket listen error"</span>);</div><div class="line">    	<span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//创建事件循环base</span></div><div class="line">    <span class="keyword">struct</span> event_base *base;</div><div class="line">    base = event_base_new();</div><div class="line">    <span class="comment">//查看多路复用IO接口方法</span></div><div class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *method =  event_base_get_method(base);</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"the method is: %s\n"</span>, method);</div><div class="line"></div><div class="line">    <span class="comment">//创建在事件ev (基于base循环的ev事件，如果server_socketfd描述符出现超时、可读事件则会调用do_accept函数，最后的base为传入回调的参数，EV_PERSIST代表此事件是永久性的)</span></div><div class="line">    <span class="keyword">struct</span> event *ev;</div><div class="line">    <span class="comment">//typedef void (*event_callback_fn)(evutil_socket_t, short, void *); do_accept回调的函数类型</span></div><div class="line">    ev = event_new(base, server_socketfd, EV_TIMEOUT|EV_READ|EV_PERSIST, do_accept, base);</div><div class="line">    <span class="comment">//注册事件</span></div><div class="line">    event_add(ev, <span class="literal">NULL</span>);</div><div class="line">    <span class="comment">//进入事件循环</span></div><div class="line">    event_base_dispatch(base);</div><div class="line">    <span class="comment">//释放event_base</span></div><div class="line">    event_base_free(base);</div><div class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
-          
+      
+    </div>
+
+    <div>
+      
         
       
     </div>
 
     <div>
       
-    </div>
+        
 
-    <div>
       
     </div>
 
     <footer class="post-footer">
       
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/07/04/树莓派USB启动/" itemprop="url">
-                  树莓派USB启动
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-04T22:38:34+08:00" content="2016-07-04">
-              2016-07-04
-            </time>
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Server/" itemprop="url" rel="index">
-                    <span itemprop="name">Server</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
+            <a href="/tags/libevent/" rel="tag">#libevent</a>
           
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><hr>
-<p>　　一般来说很多人玩树莓派系统都是放在TF卡上的，但是TF相比较U盘的差距还是挺大的，例如速度，寿命，容量等，接下来我们将使用U盘来替代TF卡成为我们树莓派的主存储</p>
-<h3 id="准备工具"><a href="#准备工具" class="headerlink" title="准备工具"></a>准备工具</h3><hr>
-<ol>
-<li>Mac一台（其他系统差不多</li>
-<li><a href="https://www.offensive-security.com/kali-linux-arm-images/" target="_blank" rel="external">kali镜像</a>（其他的镜像差不多，不一定非要kali）</li>
-<li>TF卡一张（在满足树莓派要求的TF下买最便宜的，我的是4GB的，只做引导USB启动而已）</li>
-<li>U盘一个 (64GB）</li>
-</ol>
-<h3 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h3><hr>
-<h4 id="格式化TF卡和U盘"><a href="#格式化TF卡和U盘" class="headerlink" title="格式化TF卡和U盘"></a>格式化TF卡和U盘</h4><p>打开Disk Utility进行格式化如图1、2</p>
-<img src="/2016/07/04/树莓派USB启动/1.png" alt="图1" title="图1">
-<img src="/2016/07/04/树莓派USB启动/2.png" alt="图2" title="图2">
-<h4 id="查看设备描述"><a href="#查看设备描述" class="headerlink" title="查看设备描述"></a>查看设备描述</h4><p>打开终端 diskutil list查看设备描述如图2这里我的TF卡是/dev/disk3 u盘是/dev/disk4 如图3</p>
-<img src="/2016/07/04/树莓派USB启动/3.png" alt="图3" title="图3">
-<h4 id="unmout-u盘设备"><a href="#unmout-u盘设备" class="headerlink" title="unmout u盘设备"></a>unmout u盘设备</h4><p>diskutil unmountdisk /dev/disk4 如图4</p>
-<img src="/2016/07/04/树莓派USB启动/4.png" alt="图4" title="图4">
-<h4 id="烧写镜像"><a href="#烧写镜像" class="headerlink" title="烧写镜像"></a>烧写镜像</h4><p>sudo dd if=/pathtoyour/kali-2.1.2-rpi2.img of=/dev/disk4 bs=1m 如图5</p>
-<img src="/2016/07/04/树莓派USB启动/5.png" alt="图5" title="图5">
-<h4 id="修改启动配置文件"><a href="#修改启动配置文件" class="headerlink" title="修改启动配置文件"></a>修改启动配置文件</h4><p>将烧写好的的U盘打开并将所见所有文件复制到tf卡中，并修改tf卡中的cmdline.txt文件将root=/dev/mmcblk0p2 修改为/dev/sda2 保存如图6、7<br><img src="/2016/07/04/树莓派USB启动/6.png" alt="图6" title="图6"><br><img src="/2016/07/04/树莓派USB启动/7.png" alt="图7" title="图7"></p>
-<h4 id="重分配空间"><a href="#重分配空间" class="headerlink" title="重分配空间"></a>重分配空间</h4><p>把U盘和TF卡从电脑上拔出插入树莓派并启动，df -h 发现我们的U盘并没达到64G，而只有可怜的6.7G，重新分配空间，如图8，9，10</p>
-<img src="/2016/07/04/树莓派USB启动/8.png" alt="图8" title="图8">
-<img src="/2016/07/04/树莓派USB启动/9.png" alt="图9" title="图9">
-<p>重新启动 reboot</p>
-<img src="/2016/07/04/树莓派USB启动/10.png" alt="图10" title="图10">
-<p>Enjoy!</p>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/04/树莓派USB启动/" rel="next" title="树莓派USB启动">
+                <i class="fa fa-chevron-left"></i> 树莓派USB启动
+              </a>
+            
+          </div>
 
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
       
 
       
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -491,6 +390,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -510,8 +413,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/avatar.jpg"
@@ -561,6 +473,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一个简单的例子"><span class="nav-number">2.</span> <span class="nav-text">一个简单的例子</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -664,6 +587,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 
